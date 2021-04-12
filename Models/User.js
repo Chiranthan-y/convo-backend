@@ -3,7 +3,7 @@ const crypto = require('crypto');
 
 const { v4: uuidv4 } = require('uuid');
 
-const { friendsSchema } = require('./ExtraSchema');
+const { friendsSchema } = require('./FriendsSchema');
 
 const userSchema = new mongoose.Schema(
   {
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
 
     username: {
       type: String,
-      maxlength: 10,
+      maxlength: 20,
       required: true,
       unique: true,
     },

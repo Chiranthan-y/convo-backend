@@ -1,5 +1,3 @@
-const Message = require('./../Models/Message');
-
 const User = require('./../Models/User');
 
 exports.newMessage = (req, res) => {
@@ -21,8 +19,14 @@ exports.newMessage = (req, res) => {
 };
 
 exports.syncMessage = (req, res) => {
-  //
-  Message.find((error, data) => {
-    //
+  console.log(req.profile);
+  User.findById(req.profile._id, (error, data) => {
+    if (error || !data) {
+      res.status(400).json({
+        error: 'Message not found',
+      });
+    }
+
+    res.status(200).json({});
   });
 };

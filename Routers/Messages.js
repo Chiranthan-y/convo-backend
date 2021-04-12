@@ -10,8 +10,18 @@ const { syncMessage, newMessage } = require('../Controllers/Message');
 
 router.param('userId', getUserById);
 
-router.post('/:userId/message/new', isSignedIn, isAuthenticated, newMessage);
+router.post(
+  '/user/:userId/message/new',
+  isSignedIn,
+  isAuthenticated,
+  newMessage
+);
 
-router.get('/:userId/messages/sycn', isSignedIn, isAuthenticated, syncMessage);
+router.get(
+  '/user/:userId/message/sync',
+  isSignedIn,
+  isAuthenticated,
+  syncMessage
+);
 
 module.exports = router;
