@@ -8,8 +8,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const Authentication = require('./Routers/Authentication');
-const Messages = require('./Routers/Messages');
 const User = require('./Routers/User');
+const Friends = require('./Routers/Friends');
 
 const app = express();
 
@@ -28,13 +28,9 @@ mongoose
     console.log('DATABASE CONNECTED');
   });
 
-app.get('/', (req, res) => {
-  res.json('HELLO there!');
-});
-
 app.use('/api', Authentication);
-app.use('/api', Messages);
 app.use('/api', User);
+app.use('/api', Friends);
 
 app.listen(process.env.PORT, () => {
   console.log('SEVER CONNECTED');

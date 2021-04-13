@@ -3,8 +3,6 @@ const crypto = require('crypto');
 
 const { v4: uuidv4 } = require('uuid');
 
-const { friendsSchema } = require('./FriendsSchema');
-
 const userSchema = new mongoose.Schema(
   {
     firstname: {
@@ -24,7 +22,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       maxlength: 20,
       required: true,
+      lowercase: true,
       unique: true,
+    },
+    dateofbirth: {
+      type: Date,
     },
 
     email: {
@@ -33,12 +35,13 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
+
     bio: {
       type: String,
       maxlength: 100,
     },
 
-    photo: {
+    profilepic: {
       type: Buffer,
       contentType: String,
     },
@@ -57,12 +60,10 @@ const userSchema = new mongoose.Schema(
     },
 
     salt: String,
-    role: {
-      type: Number,
-      default: 0,
-    },
-    Friends: [friendsSchema],
-    Group: [{ type: Object, ref: 'Group' }],
+
+    friendlist: [{ type: Object, ref: 'User' }],
+
+    grouplist: [{ type: Object, ref: 'Group' }],
   },
   {
     timestamps: true,

@@ -11,12 +11,12 @@ const groupSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'User',
   },
-  photo: {
+  grouppic: {
     type: Buffer,
     contentType: String,
   },
   members: [{ type: ObjectId, ref: 'User' }],
-  Messages: [messageSchema],
+  messages: [{ type: ObjectId, ref: 'Message' }],
 });
 
 module.exports = mongoose.model('Group', groupSchema);
