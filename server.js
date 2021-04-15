@@ -10,6 +10,7 @@ const cors = require('cors');
 const Authentication = require('./Routers/Authentication');
 const User = require('./Routers/User');
 const Friends = require('./Routers/Friends');
+const Message = require('./Routers/Message');
 
 const app = express();
 
@@ -31,6 +32,7 @@ mongoose
 app.use('/api', Authentication);
 app.use('/api', User);
 app.use('/api', Friends);
+app.use('/api', Message);
 
 app.listen(process.env.PORT, () => {
   console.log('SEVER CONNECTED');

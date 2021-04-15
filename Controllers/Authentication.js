@@ -53,14 +53,14 @@ exports.signUp = (req, res) => {
 
     user = new User(fields);
 
-    if (files.photo) {
-      if (files.photo.size > 5242880) {
+    if (files.profilepic) {
+      if (files.profilepic.size > 5242880) {
         res.status(400).json({
           error: 'file is too large',
         });
       }
-      user.photo = fs.readFileSync(files.photo.path);
-      user.photo.contentType = files.photo.type;
+      user.profilepic = fs.readFileSync(files.profilepic.path);
+      user.profilepic.contentType = files.profilepic.type;
     }
 
     user.save((error, user) => {
@@ -146,4 +146,35 @@ exports.isAuthenticated = (req, res, next) => {
     });
   }
   next();
+};
+
+exports.isFriend = (req, res, next) => {
+  id = req.profile._id;
+  friendId = req.body.friendId || req.body.reciver;
+  User.findById(id, (error, data) => {
+    let flag;
+    data.friendlist.map((id) => {
+      if (id === friendId) {
+        flag = true;
+      } else {
+        flag = false;
+      }
+    });
+
+    if (error || !data) {
+      return res.status(400).json({ error });
+    }
+    if (flag == false) {
+      return res.status(400).json({ error: 'not friends' });
+    }
+    next();
+  });
+};
+
+exports.isGroupAdmin = (req, res, next) => {
+  //
+};
+
+exports.isGroupMember = (req, res, next) => {
+  //
 };

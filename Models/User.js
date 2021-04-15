@@ -64,6 +64,8 @@ const userSchema = new mongoose.Schema(
     friendlist: [{ type: Object, ref: 'User' }],
 
     grouplist: [{ type: Object, ref: 'Group' }],
+
+    messages: [{ type: Object, res: 'Message' }],
   },
   {
     timestamps: true,

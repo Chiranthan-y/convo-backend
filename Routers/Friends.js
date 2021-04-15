@@ -2,8 +2,9 @@ const express = require('express');
 const {
   isSignedIn,
   isAuthenticated,
+  isFriend,
 } = require('../Controllers/Authentication');
-const { addFriend } = require('../Controllers/Friends');
+const { addFriend, removeFriend } = require('../Controllers/Friends');
 const { getUserById } = require('../Controllers/User');
 const router = express.Router();
 
@@ -14,6 +15,14 @@ router.post(
   isSignedIn,
   isAuthenticated,
   addFriend
+);
+
+router.delete(
+  '/user/:userId/friends/remove',
+  isSignedIn,
+  isAuthenticated,
+  isFriend,
+  removeFriend
 );
 
 module.exports = router;
