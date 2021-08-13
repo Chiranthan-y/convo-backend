@@ -20,7 +20,7 @@ router.post(
 //!-------------------- should code for reciving the message ------------------------->
 
 router.get(
-  '/user/:userId/friend/:userId/message/sync',
+  '/user/:userId/message/sync',
   isSignedIn,
   isAuthenticated,
   isFriend,

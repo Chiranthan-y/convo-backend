@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const Authentication = require('./Routers/Authentication');
 const User = require('./Routers/User');
 const Friends = require('./Routers/Friends');

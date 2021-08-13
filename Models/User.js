@@ -29,13 +29,6 @@ const userSchema = new mongoose.Schema(
       type: Date,
     },
 
-    email: {
-      type: String,
-      required: true,
-      trim: true,
-      unique: true,
-    },
-
     bio: {
       type: String,
       maxlength: 100,

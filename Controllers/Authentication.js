@@ -15,36 +15,13 @@ exports.signUp = (req, res) => {
       });
     }
 
-    const {
-      firstname,
-      lastname,
-      username,
-      password,
-      email,
-      phonenumber,
-      bio,
-    } = fields;
+    const { firstname, lastname, username, password, phonenumber } = fields;
 
-    if (
-      !firstname ||
-      !lastname ||
-      !username ||
-      !password ||
-      !email ||
-      !phonenumber ||
-      !bio
-    ) {
+    if (!firstname || !lastname || !username || !password || !phonenumber) {
       res.status(400).json({
         error: 'Fill all the fields',
       });
     }
-
-    if (!validator.isEmail(email)) {
-      res.status(400).json({
-        error: 'Invalid email address',
-      });
-    }
-
     if (!validator.isMobilePhone(phonenumber, 'en-IN')) {
       res.status(400).json({
         error: 'invalid phonenumber',
@@ -85,9 +62,9 @@ exports.signIn = (req, res) => {
       });
     }
 
-    const { email, password } = fields;
+    const { username, password } = fields;
 
-    User.findOne({ email }, (err, urs) => {
+    User.findOne({ username }, (err, urs) => {
       if (err || !urs) {
         return res.status(402).json({
           error: 'USER dose not exsist',
@@ -95,7 +72,7 @@ exports.signIn = (req, res) => {
       }
       if (!urs.autheticate(password)) {
         return res.status(401).json({
-          error: 'email and password not matched',
+          error: 'username and password not matched',
         });
       }
       //create token
@@ -107,13 +84,13 @@ exports.signIn = (req, res) => {
       //send responce
 
       const { _id, firstname, email, role } = urs;
+      console.log(urs);
       return res.json({
         token,
         user: {
           _id,
           firstname,
-          email,
-          role,
+          username,
         },
       });
     });
