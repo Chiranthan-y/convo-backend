@@ -83,13 +83,12 @@ exports.signIn = (req, res) => {
       res.cookie('token', token, { expire: new Date() + 9999 });
       //send responce
 
-      const { _id, firstname, email, role } = urs;
-      console.log(urs);
+      const { _id, username, phonenumber } = urs;
       return res.json({
         token,
         user: {
           _id,
-          firstname,
+          phonenumber,
           username,
         },
       });

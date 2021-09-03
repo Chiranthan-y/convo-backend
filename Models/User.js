@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-
+const { ObjectId } = mongoose.Schema;
 const { v4: uuidv4 } = require('uuid');
 
 const userSchema = new mongoose.Schema(
@@ -54,11 +54,8 @@ const userSchema = new mongoose.Schema(
 
     salt: String,
 
-    friendlist: [{ type: Object, ref: 'User' }],
-
-    grouplist: [{ type: Object, ref: 'Group' }],
-
-    messages: [{ type: Object, res: 'Message' }],
+    friendlist: [{ type: ObjectId, ref: 'User' }],
+    conversation: [{ type: ObjectId, ref: 'Conversation' }],
   },
   {
     timestamps: true,

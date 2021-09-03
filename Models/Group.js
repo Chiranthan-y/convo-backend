@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
-const { messageSchema } = require('./ExtraSchema');
 
 const groupSchema = new mongoose.Schema({
   name: {

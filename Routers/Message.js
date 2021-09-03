@@ -1,4 +1,5 @@
 const express = require('express');
+const { getConversationById } = require('../Controllers/Conversations');
 const { getUserById } = require('../Controllers/User');
 const {
   isSignedIn,
@@ -8,19 +9,20 @@ const {
 const { newMessage, syncMessage } = require('./../Controllers/Message');
 const router = express.Router();
 
-router.param('userId', getUserById);
-router.post(
-  '/user/:userId/message/new',
-  isSignedIn,
-  isAuthenticated,
-  isFriend,
-  newMessage
-);
+router
+  .param('userId', getUserById)
+  .param('conversationId', getConversationById)
+  .post(
+    '/user/:userId/message/:conversationId',
+    isSignedIn,
+    isAuthenticated,
+    newMessage
+  );
 
 //!-------------------- should code for reciving the message ------------------------->
 
 router.get(
-  '/user/:userId/message/sync',
+  '/user/:userId/message/:conversationId',
   isSignedIn,
   isAuthenticated,
   isFriend,
