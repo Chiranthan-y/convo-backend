@@ -30,7 +30,6 @@ exports.updateUser = (req, res) => {
           error: 'your not authorized to edit the user',
         });
       }
-
       return res.json({
         role: usr.role,
         purchases: usr.purchases,

@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema(
 
     salt: String,
 
-    friendlist: [{ type: ObjectId, ref: 'User' }],
+    friendlist: [{ type: ObjectId, ref: 'Friends' }],
     conversation: [{ type: ObjectId, ref: 'Conversation' }],
   },
   {
